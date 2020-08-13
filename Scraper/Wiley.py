@@ -1,7 +1,8 @@
 from bs4 import BeautifulSoup
+import pandas as pd
 import webbot
 import time
-from loutput import louput as lp
+#from loutput import louput as lp
 
 class Wileyscraper:
     """
@@ -11,19 +12,35 @@ class Wileyscraper:
     def __init__(self):
         # Browser
         self.wiley_home = 'https://onlinelibrary.wiley.com'
-        self.url = self.wiley_home + '/loi/14680262'
+        self.econometrica = '/loi/14680262'
+        self.JAE = '/loi/10991255'
 
-        self.web = webbot.Browser()
-        self.web.go_to(self.url)
+        #self.url = self.wiley_home + '/loi/14680262'
+        #self.web = webbot.Browser()
+        #self.web.go_to(self.url)
         # time.sleep(1)
 
-    def scrape(self):
+    def scrape(self, journal):
+        # Browser
+        if (journal == "JAE") or (journal == "Journal of Econometrics"):
+            my_url = self.wiley_home + self.JAE
+        elif (journal == "econometrica") or (journal == "Econometrica"):
+            my_url = self.wiley_home + self.econometrica
+        else:
+            raise ValueError("No such a Journal!")
+
+        self.web = webbot.Browser()
+        self.web.go_to(my_url)
+
         # crawler
         page = self.web.get_page_source()
         soup = BeautifulSoup(page, "html.parser")
         issues = soup.find_all('div', {'class': 'loi__issue'})
 
-        all_art_this_year = []
+        titles = []
+        authors = []
+        links = []
+        abstract = []
         for atag in issues:
             link = self.wiley_home + atag.a["href"]
             self.web.go_to(link)
@@ -33,53 +50,55 @@ class Wileyscraper:
             # articles = soup_sub.find_all('div', {'class': 'content-item-format-links'})
             articles = soup_sub.find_all('a', {'class': 'issue-item__title'})
             articles = articles[2:-4]
-            articles_list = []
+
             for i in articles:
-                title = i.text.strip()  # titles
+                title_text = i.text.strip()  # titles
+                titles.append(title_text)
                 # print(title)
                 link_art = self.wiley_home + i["href"]
+                links.append(link_art)
                 self.web.go_to(link_art)
                 page_art = self.web.get_page_source()
                 soup_art = BeautifulSoup(page_art, "html.parser")
 
-                authors = soup_art.find_all('a', {'class': 'author-name'})
-                if not authors:
+                author_soup = soup_art.find_all('a', {'class': 'author-name'})
+                if not author_soup:
                     # pass
-                    # print("no authors")
-                    authors_text = "no authors"
+                    # print("no author")
+                    authors_text = "no author"
                 else:
-                    num_authors = len(authors) * 0.5
+                    num_authors = len(author_soup) * 0.5
                     num_authors = int(num_authors)
-                    authors_text = []
-                    for a in range(0, (num_authors - 1)):
-                        # print(authors[a].text.strip())
-                        authors_text.append(authors[a].text.strip())
+                    if num_authors == 1:
+                        authors_text = author_soup[0].text.strip()
+                    else:
+                        authors_text = []
+                        for a in range(0, (num_authors - 1)):
+                            # print(author_soup[a].text.strip())
+                            authors_text.append(author_soup[a].text.strip())
+                authors.append(authors_text)
 
-                abstract = soup_art.find_all('div', {'class': 'article-section__content'})
-                if not abstract:
+                abstract_soup = soup_art.find_all('div', {'class': 'article-section__content'})
+                if not abstract_soup:
                     # pass
                     # print("no abstract")
                     abstract_text = "no abstract"
                 else:
-                    abstract_text = abstract[0].text.strip()
+                    abstract_text = abstract_soup[0].text.strip()
                     # print(abstract_text)
-                    #
-                article_dict = {'title': title, 'authors': authors_text, 'link': link_art, 'abstract': abstract_text}
+                abstract.append(abstract_text)
 
-                articles_list.append(article_dict)
+        article_dict = {'title': titles, 'author': authors, 'link': links, 'abstract': abstract}
+        all_article_df = pd.DataFrame(article_dict)
 
-            all_art_this_year.append(articles_list)
-
-        return all_art_this_year
+        return all_article_df
 
 
 
 
 if __name__ == "__main__":
     scraper = Wileyscraper()
-    all_art = scraper.scrape()
-    lp(all_art) #
-
-    # [[{'title': 'State Capacity, Reciprocity, and the Social Contract', '
-    # length  = 4
+    Journals = ["econometrica"]
+    df = scraper.scrape()
+    df.to_csv("output.csv", header=True)
 
