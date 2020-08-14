@@ -27,9 +27,9 @@ e.g., server, running the code in the `screen` mode in recommended.
 - Journal of Business Finance & Accounting (JBFA)
 - Biometrical Journal (BioJ)
 - Canadian Journal of Statistics (CAJS)
-- Journal of the Royal Statistical Society: A
-- Journal of the Royal Statistical Society: B
-- Journal of the Royal Statistical Society: C
+- Journal of the Royal Statistical Society: A (JRSSA)
+- Journal of the Royal Statistical Society: B (JRSSB)
+- Journal of the Royal Statistical Society: C (JRSSC)
 - Financial Management (FinM)
 - Financial Review (FinR)
 - The Journal of Finance (JFin)
