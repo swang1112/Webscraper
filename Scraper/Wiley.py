@@ -1,8 +1,10 @@
 from bs4 import BeautifulSoup
 import pandas as pd
 import webbot
-import time
-#from loutput import louput as lp
+
+
+# import time
+# from loutput import louput as lp
 
 class Wileyscraper:
     """
@@ -14,10 +16,21 @@ class Wileyscraper:
         self.wiley_home = 'https://onlinelibrary.wiley.com'
         self.econometrica = '/loi/14680262'
         self.JAE = '/loi/10991255'
+        self.OBES = '/loi/14680084'
+        self.economJ = '/loi/1368423x'
+        self.IER = '/loi/14682354'
+        self.JMCB = '/loi/15384616'
+        self.JEMS = '/loi/15309134'
+        self.FinM = '/loi/1755053x'
+        self.FinR = '/loi/15406288'
+        self.JFin = '/loi/15406261'
+        self.JFinR = '/loi/14756803'
+        self.JFM = '/loi/10969934'
+        self.JRIns = '/loi/15396975'
 
-        #self.url = self.wiley_home + '/loi/14680262'
-        #self.web = webbot.Browser()
-        #self.web.go_to(self.url)
+        # self.url = self.wiley_home + '/loi/14680262'
+        # self.web = webbot.Browser()
+        # self.web.go_to(self.url)
         # time.sleep(1)
 
     def scrape(self, journal):
@@ -26,6 +39,28 @@ class Wileyscraper:
             my_url = self.wiley_home + self.JAE
         elif (journal == "econometrica") or (journal == "Econometrica"):
             my_url = self.wiley_home + self.econometrica
+        elif (journal == 'OBES') or (journal == "Oxford Bulletin of Economics and Statistics"):
+            my_url = self.wiley_home + self.OBES
+        elif (journal == 'Econom. J.') or (journal == "The Econometrics Journal"):
+            my_url = self.wiley_home + self.economJ
+        elif (journal == 'IER') or (journal == "International Economic Review"):
+            my_url = self.wiley_home + self.IER
+        elif (journal == 'JMCB') or (journal == " Journal of Money, Credit and Banking"):
+            my_url = self.wiley_home + self.JMCB
+        elif (journal == 'JEMS') or (journal == "Journal of Economics & Management Strategy"):
+            my_url = self.wiley_home + self.JEMS
+        elif (journal == 'FinM') or (journal == "Financial Management"):
+            my_url = self.wiley_home + self.FinM
+        elif (journal == 'FinR') or (journal == "Financial Review"):
+            my_url = self.wiley_home + self.FinR
+        elif (journal == 'JFin') or (journal == "The Journal of Finance"):
+            my_url = self.wiley_home + self.JFin
+        elif (journal == 'JFinR') or (journal == "Journal of Financial Research"):
+            my_url = self.wiley_home + self.JEMS
+        elif (journal == 'JFM') or (journal == "Journal of Futures Markets"):
+            my_url = self.wiley_home + self.JFM
+        elif (journal == 'JRIns') or (journal == "Journal of Risk and Insurance"):
+            my_url = self.wiley_home + self.JRIns
         else:
             raise ValueError("No such a Journal!")
 
@@ -49,7 +84,7 @@ class Wileyscraper:
             soup_sub = BeautifulSoup(page_sub, "html.parser")
             # articles = soup_sub.find_all('div', {'class': 'content-item-format-links'})
             articles = soup_sub.find_all('a', {'class': 'issue-item__title'})
-            #articles = articles[2:-4]
+            # articles = articles[2:-4]
 
             for i in articles:
                 title_text = i.text.strip()  # titles
@@ -74,9 +109,9 @@ class Wileyscraper:
                         pass
                     else:
                         blank_str = ", "
-                        for a in range(1, (num_authors - 1)):
+                        for a in range(1, num_authors):
                             # print(author_soup[a].text.strip())
-                            authors_text = authors_text +  blank_str + author_soup[a].text.strip()
+                            authors_text = authors_text + blank_str + author_soup[a].text.strip()
                 authors.append(authors_text)
 
                 abstract_soup = soup_art.find_all('div', {'class': 'article-section__content'})
@@ -95,11 +130,10 @@ class Wileyscraper:
         return all_article_df
 
 
-
-
 if __name__ == "__main__":
     scraper = Wileyscraper()
-    Journals = ["econometrica"]
-    df = scraper.scrape("econometrica")
-    df.to_csv("output.csv", header=True)
-
+    Journals = ["econometrica", "JAE", "OBES", "Econom. J.", "IER", "JMBC", "JEMS", "FinM", "FinR", "JFin", "JFinR", "JFM", "JRIns"]
+    for j in Journals:
+        df = scraper.scrape(j)
+        file_name = j + ".csv"
+        df.to_csv(file_name, header=True)
