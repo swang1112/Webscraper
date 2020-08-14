@@ -3,9 +3,9 @@
  
  If you are interested in finding information of articles from a specific journal,
  just parse the name (i.e. string) of the journal (see below) to the variable `target_journal` 
- in the file `main.py`, for example `target_journal = "International Economic Review"`. 
+ in the file `main.py`, for example `target_journal = "International Economic Review"` or `target_journal = "IER"`. 
  Running the file `main.py` would collect the `title`, `authors`, `link` and `abstract` of all 
- articles from the journal published in the current year produce in a `.csv` file.
+ articles from the journal published in the current year in a `.csv` file.
  
  If you want to collect all journals produced by a certain publisher, which will take a while,
  just go into the `Scraper` folder, find the name of that publisher and directly run that script,
