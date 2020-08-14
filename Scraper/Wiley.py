@@ -49,7 +49,7 @@ class Wileyscraper:
             soup_sub = BeautifulSoup(page_sub, "html.parser")
             # articles = soup_sub.find_all('div', {'class': 'content-item-format-links'})
             articles = soup_sub.find_all('a', {'class': 'issue-item__title'})
-            articles = articles[2:-4]
+            #articles = articles[2:-4]
 
             for i in articles:
                 title_text = i.text.strip()  # titles
@@ -69,13 +69,14 @@ class Wileyscraper:
                 else:
                     num_authors = len(author_soup) * 0.5
                     num_authors = int(num_authors)
+                    authors_text = author_soup[0].text.strip()
                     if num_authors == 1:
-                        authors_text = author_soup[0].text.strip()
+                        pass
                     else:
-                        authors_text = []
-                        for a in range(0, (num_authors - 1)):
+                        blank_str = ", "
+                        for a in range(1, (num_authors - 1)):
                             # print(author_soup[a].text.strip())
-                            authors_text.append(author_soup[a].text.strip())
+                            authors_text = authors_text +  blank_str + author_soup[a].text.strip()
                 authors.append(authors_text)
 
                 abstract_soup = soup_art.find_all('div', {'class': 'article-section__content'})
@@ -99,6 +100,6 @@ class Wileyscraper:
 if __name__ == "__main__":
     scraper = Wileyscraper()
     Journals = ["econometrica"]
-    df = scraper.scrape()
+    df = scraper.scrape("econometrica")
     df.to_csv("output.csv", header=True)
 
