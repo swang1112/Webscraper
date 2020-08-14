@@ -27,6 +27,19 @@ class Wileyscraper:
         self.JFinR = '/loi/14756803'
         self.JFM = '/loi/10969934'
         self.JRIns = '/loi/15396975'
+        self.APPC = '/loi/19113838'
+        self.JIFMA = '/loi/1467646x'
+        self.JCAF = '/loi/10970053'
+        self.IJAudi = '/loi/10991123'
+        self.JAccR = '/loi/1475679x'
+        self.FiscS = '/loi/14755890'
+        self.CAccR = '/loi/19113846'
+        self.JBFA = '/loi/14685957'
+        self.BioJ = '/loi/15214036'
+        self.CAJS = '/loi/1708945x'
+        self.JRSSA = '/loi/1467985x'
+        self.JRSSB = '/loi/14679868'
+        self.JRSSC = '/loi/14679876'
 
         # self.url = self.wiley_home + '/loi/14680262'
         # self.web = webbot.Browser()
@@ -61,6 +74,32 @@ class Wileyscraper:
             my_url = self.wiley_home + self.JFM
         elif (journal == 'JRIns') or (journal == "Journal of Risk and Insurance"):
             my_url = self.wiley_home + self.JRIns
+        elif (journal == 'APPC') or (journal == "Accounting Perspectives"):
+            my_url = self.wiley_home + self.APPC
+        elif (journal == 'JIFMA') or (journal == "Journal of International Financial Management & Accounting"):
+            my_url = self.wiley_home + self.JIFMA
+        elif (journal == 'JCAF') or (journal == "Journal of Corporate Accounting & Finance"):
+            my_url = self.wiley_home + self.JCAF
+        elif (journal == 'IJAudi') or (journal == "International Journal of Auditing"):
+            my_url = self.wiley_home + self.IJAudi
+        elif (journal == 'JAccR') or (journal == "Journal of Accounting Research"):
+            my_url = self.wiley_home + self.JAccR
+        elif (journal == 'FiscS') or (journal == "Fiscal Studies"):
+            my_url = self.wiley_home + self.FiscS
+        elif (journal == 'CAccR') or (journal == "Contemporary Accounting Research"):
+            my_url = self.wiley_home + self.CAccR
+        elif (journal == 'JBFA') or (journal == "Journal of Business Finance & Accounting"):
+            my_url = self.wiley_home + self.JBFA
+        elif (journal == 'BioJ') or (journal == "Biometrical Journal"):
+            my_url = self.wiley_home + self.BioJ
+        elif (journal == 'CAJS') or (journal == "Canadian Journal of Statistics"):
+            my_url = self.wiley_home + self.CAJS
+        elif (journal == 'JRSSA') or (journal == "Journal of the Royal Statistical Society: A"):
+            my_url = self.wiley_home + self.JRSSA
+        elif (journal == 'JRSSB') or (journal == "Journal of the Royal Statistical Society: B"):
+            my_url = self.wiley_home + self.JRSSB
+        elif (journal == 'JRSSC') or (journal == "Journal of the Royal Statistical Society: C"):
+            my_url = self.wiley_home + self.JRSSC
         else:
             raise ValueError("No such a Journal!")
 
@@ -132,7 +171,7 @@ class Wileyscraper:
 
 if __name__ == "__main__":
     scraper = Wileyscraper()
-    Journals = ["econometrica", "JAE", "OBES", "Econom. J.", "IER", "JMBC", "JEMS", "FinM", "FinR", "JFin", "JFinR", "JFM", "JRIns"]
+    Journals = ["econometrica", "JAE", "OBES", "Econom. J.", "IER", "JMBC", "JEMS", "FinM", "FinR", "JFin", "JFinR", "JFM", "JRIns", "APPC", "JIFMA", "JCAF", "IJAudi", "JAccR", "FiscS", "CAccR", "JBFA", "BioJ", "CAJS", "JRSSA", "JRSSB", "JRSSC"]
     for j in Journals:
         df = scraper.scrape(j)
         file_name = j + ".csv"

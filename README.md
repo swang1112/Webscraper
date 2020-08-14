@@ -11,7 +11,12 @@
  just go into the `Scraper` folder, find the name of that publisher and directly run that script,
  for example `Wiley.py` for Wiley & Sons.
  
-Only 13 journals of Wiley & Sons are included in the function:
+Because all `html` source codes are acquired using `webbot`, it only works if you have 
+installed Chrome on your maschine. If you intend to run the code on a remote maschine
+e.g., server, running the code in the `screen` mode in recommended.
+ 
+## Supported Journals
+26 journals of Wiley & Sons are supported so far (not fully tested, bug reports are welcome!)
 - Journal of Applied Econometrics (JAE)
 - Econometrica
 - Oxford Bulletin of Economics and Statistics (OBES)
@@ -19,19 +24,28 @@ Only 13 journals of Wiley & Sons are included in the function:
 - International Economic Review (IER)
 - Journal of Money, Credit and Banking (JMCB)
 - Journal of Economics & Management Strategy (JEMS)
+- Journal of Business Finance & Accounting (JBFA)
+- Biometrical Journal (BioJ)
+- Canadian Journal of Statistics (CAJS)
+- Journal of the Royal Statistical Society: A
+- Journal of the Royal Statistical Society: B
+- Journal of the Royal Statistical Society: C
 - Financial Management (FinM)
 - Financial Review (FinR)
 - The Journal of Finance (JFin)
 - Journal of Financial Research (JFinR)
 - Journal of Futures Markets (JFM)
 - Journal of Risk and Insurance (JRIns)
+- Accounting Perspectives (APPC)
+- Journal of International Financial Management & Accounting (JIFMA)
+- Journal of Corporate Accounting & Finance (JCAF)
+- International Journal of Auditing (IJAudi)
+- Journal of Accounting Research (JAccR)
+- Fiscal Studies (FiscS)
+- Contemporary Accounting Research (CAccR)
 
 More journals from Wiley and other publishers will be included in the upcoming future.
 There will also be some search functions, which allow users to identify the articles of their interest.
-
-Because all `html` source codes are acquired using `webbot`, it only works if you have 
-installed Chrome on your maschine. If you intend to run the code on a remote maschine
-e.g., server, running the code in the `screen` mode in recommended.
 
 
  
