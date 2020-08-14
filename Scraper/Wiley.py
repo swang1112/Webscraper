@@ -35,7 +35,7 @@ class Wileyscraper:
 
     def scrape(self, journal):
         # Browser
-        if (journal == "JAE") or (journal == "Journal of Econometrics"):
+        if (journal == "JAE") or (journal == "Journal of Applied Econometrics"):
             my_url = self.wiley_home + self.JAE
         elif (journal == "econometrica") or (journal == "Econometrica"):
             my_url = self.wiley_home + self.econometrica
@@ -45,7 +45,7 @@ class Wileyscraper:
             my_url = self.wiley_home + self.economJ
         elif (journal == 'IER') or (journal == "International Economic Review"):
             my_url = self.wiley_home + self.IER
-        elif (journal == 'JMCB') or (journal == " Journal of Money, Credit and Banking"):
+        elif (journal == 'JMCB') or (journal == "Journal of Money, Credit and Banking"):
             my_url = self.wiley_home + self.JMCB
         elif (journal == 'JEMS') or (journal == "Journal of Economics & Management Strategy"):
             my_url = self.wiley_home + self.JEMS
