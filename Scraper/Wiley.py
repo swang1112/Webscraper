@@ -171,7 +171,7 @@ class Wileyscraper:
 
 if __name__ == "__main__":
     scraper = Wileyscraper()
-    Journals = ["JAE", "econometrica", "OBES", "Econom. J.", "IER", "JMBC", "JEMS", "FinM", "FinR", "JFin", "JFinR", "JFM", "JRIns", "APPC", "JIFMA", "JCAF", "IJAudi", "JAccR", "FiscS", "CAccR", "JBFA", "BioJ", "CAJS", "JRSSA", "JRSSB", "JRSSC"]
+    Journals = ["JAE", "econometrica", "OBES", "Econom. J.", "IER", "JMCB", "JEMS", "FinM", "FinR", "JFin", "JFinR", "JFM", "JRIns", "APPC", "JIFMA", "JCAF", "IJAudi", "JAccR", "FiscS", "CAccR", "JBFA", "BioJ", "CAJS", "JRSSA", "JRSSB", "JRSSC"]
     for j in Journals:
         df = scraper.scrape(j)
         file_name = j + ".csv"
