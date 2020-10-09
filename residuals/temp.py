@@ -24,4 +24,4 @@ def main():
 
 if __name__ == "__main__":
     df = main()
-    df.to_csv("current_fear_and_greed", header=True)
+    df.to_csv("current_fear_and_greed.csv", header=True)
